@@ -151,26 +151,99 @@ is the Microsoft Store stub, not a real install. Use the Node command above.
 Live on GitHub Pages at <https://ryanbowman19.github.io/>, served from `main`.
 Push and it redeploys. HTTPS is automatic and enforced.
 
-### Pointing a real domain at it later
+### Moving to bowsites.com
 
-When you buy `bowsites.com` (Cloudflare Registrar or Namecheap, ~$10/yr):
+`bowsites.com` was unregistered as of 2026-07-28 — confirm at checkout, the
+registrar is the only real authority.
 
-1. At your registrar, add these DNS records:
-   ```
-   A     @    185.199.108.153
-   A     @    185.199.109.153
-   A     @    185.199.110.153
-   A     @    185.199.111.153
-   CNAME www  ryanbowman19.github.io
-   ```
-2. GitHub repo → Settings → Pages → Custom domain → enter `bowsites.com` → Save
-3. Wait for the DNS check, then tick **Enforce HTTPS**
-4. Find-and-replace `https://ryanbowman19.github.io/` with `https://bowsites.com/`
-   in `index.html`, `robots.txt`, and `sitemap.xml`, then push
+**1. Buy it.** [Cloudflare Registrar](https://domains.cloudflare.com) sells at
+cost (~$10/yr, no upsells, free WHOIS privacy). [Porkbun](https://porkbun.com)
+and [Namecheap](https://namecheap.com) are fine too. Avoid GoDaddy — the
+headline price renews much higher and the checkout is a minefield of add-ons.
+Decline every extra; you need none of them.
 
-A custom domain is worth the $10. `ryanbowman19.github.io` is fine for showing
-people, but a web designer selling websites off a github.io subdomain invites
-the obvious question.
+**2. Add DNS records** at the registrar:
+
+```
+Type   Name   Value
+A      @      185.199.108.153
+A      @      185.199.109.153
+A      @      185.199.110.153
+A      @      185.199.111.153
+CNAME  www    ryanbowman19.github.io
+```
+
+All four A records — they're GitHub's load balancers, not alternatives.
+
+**3. Tell GitHub.** Repo → Settings → Pages → Custom domain → `bowsites.com`
+→ Save. Wait for the green check (minutes to a few hours while DNS spreads).
+
+**4. Update the site:**
+
+```powershell
+.\tools\switch-to-domain.ps1 -Domain bowsites.com -WhatIf   # preview
+.\tools\switch-to-domain.ps1 -Domain bowsites.com           # apply
+git add -A
+git commit -m "Point the site at bowsites.com"
+git push
+```
+
+That writes the `CNAME` file and rewrites all seven absolute URLs across
+`index.html`, `robots.txt`, and `sitemap.xml`.
+
+**5. Tick Enforce HTTPS** in Settings → Pages once it's available. The
+certificate can take up to an hour. Normal.
+
+`ryanbowman19.github.io` keeps working and redirects, so nothing breaks.
+
+---
+
+## 3b. Getting found on Google
+
+**A new site is invisible until you tell Google it exists.** Nothing links to
+it, so nothing will crawl it on its own. Expect days to weeks even after you
+submit it — and being indexed is not the same as ranking.
+
+If you're buying the domain, **do this after the switch**, not before, or
+you'll do it twice.
+
+### Google Search Console
+
+1. Go to [search.google.com/search-console](https://search.google.com/search-console)
+2. **Add property** → **Domain** (left box) if you own the domain — enter
+   `bowsites.com`. Otherwise use **URL prefix** (right box) with the full
+   `https://ryanbowman19.github.io/`
+3. Verify:
+   - *Domain property* → Google gives you a TXT record. Add it at your
+     registrar alongside the A records above.
+   - *URL prefix* → choose **HTML tag**, copy the `content="..."` value, and
+     add this to `<head>` in `index.html`, then push:
+     ```html
+     <meta name="google-site-verification" content="PASTE_VALUE_HERE">
+     ```
+4. Once verified: **Sitemaps** → enter `sitemap.xml` → Submit
+5. **URL Inspection** → paste your homepage → **Request indexing**. This is the
+   fastest nudge available.
+
+### Bing too, it takes two minutes
+
+[bing.com/webmasters](https://www.bing.com/webmasters) lets you import
+straight from Search Console. Bing also feeds DuckDuckGo and ChatGPT search.
+
+### What actually makes "bowsites" find you
+
+Ranking for your own brand name needs signals beyond the page itself:
+
+- **A Google Business Profile** — free, and the strongest single move if you
+  ever operate under a real business name
+- **Links from anywhere real** — your GitHub profile, LinkedIn, any directory,
+  the footer of sites you build (with the client's permission)
+- **Consistent naming** — the same business name and contact details wherever
+  you appear online
+- **Time.** A domain registered this week ranks worse than the same domain will
+  in six months. Nothing legitimate shortcuts this.
+
+Anyone offering to fix your rankings for a fee is selling you something.
 
 ---
 
