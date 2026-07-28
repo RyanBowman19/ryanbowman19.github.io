@@ -67,13 +67,14 @@ to the browser console listing whatever's still missing.
 ### b) Booking link — ✓ live
 
 `SITE.booking` points at <https://calendly.com/bowmanryan328>. The "Or book a
-20-minute call" button appears under the contact form.
+call" button appears under the contact form.
 
 Three things to check inside Calendly, because they cost you bookings:
 
-1. **Make a 20-minute event type** named something like "Free site review."
+1. **Make a single event type** named something like "Free site review."
    A bare Calendly root URL shows every event type you have, which is a
-   confusing first impression. A single named event converts better.
+   confusing first impression. A single named event converts better. The page
+   no longer states a call length, so set whatever duration suits you.
 2. **Connect your Google Calendar** so it only offers times you're genuinely
    free. Nothing kills trust faster than a booking you have to cancel.
 3. **Strip the invitee questions down to name and email.** Every extra field
