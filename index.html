@@ -454,17 +454,13 @@
   <div class="wrap about-grid">
 
     <div class="about-portrait">
-      <!--
-        Swap this for a real photo. It matters more than anything else on
-        this page — a face is the difference between "some website" and
-        "a person I could call." Square, at least 600x600, exported as WebP:
-        <img src="assets/ryan.webp" width="600" height="600" alt="Ryan Bowman"
+      <!-- Regenerate with: npx --yes -p sharp node tools/add-photo.js -->
+      <picture>
+        <source srcset="assets/ryan.webp" type="image/webp">
+        <img src="assets/ryan.jpg" width="400" height="400"
+             alt="Ryan Bowman, who builds the websites"
              loading="lazy" decoding="async">
-      -->
-      <div class="portrait-fallback" role="img" aria-label="Ryan Bowman">
-        <span>RB</span>
-      </div>
-      <p class="portrait-note">Replace with a real photo — see the note in <code>index.html</code></p>
+      </picture>
     </div>
 
     <div class="about-copy">

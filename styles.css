@@ -908,7 +908,10 @@ p { text-wrap: pretty; }
    The page claims "a real person" six times. This is where it proves it. */
 .about-grid {
   display: grid;
-  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  /* Capped at 280px: the source photo is 400px, so this keeps it comfortably
+     above 1x and close to 1.4x on a retina screen. Widening the column would
+     only make it look softer. */
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
   gap: clamp(var(--s-6), 5vw, var(--s-8));
   align-items: start;
 }
@@ -919,14 +922,20 @@ p { text-wrap: pretty; }
 .about-portrait { position: sticky; top: calc(var(--header-h) + var(--s-5)); }
 @media (max-width: 820px) { .about-portrait { position: static; } }
 
+.about-portrait picture { display: block; }
 .about-portrait img,
 .portrait-fallback {
   width: 100%;
+  height: auto;
   aspect-ratio: 1;
   border-radius: var(--r-lg);
   border: 1px solid var(--border);
   box-shadow: var(--sh-2);
   object-fit: cover;
+}
+@media (max-width: 820px) {
+  /* Stacked layout — don't let the portrait blow up to full width. */
+  .about-portrait { max-width: 220px; }
 }
 .portrait-fallback {
   display: grid;

@@ -27,14 +27,17 @@ if (!candidates.length) {
 }
 
 const src = path.join(assets, candidates[0]);
-const SIZE = 600;
+const MAX = 600;
 
 (async () => {
   const meta = await sharp(src).metadata();
   console.log(`Source: ${candidates[0]} — ${meta.width}x${meta.height}`);
 
-  if (meta.width < SIZE || meta.height < SIZE) {
-    console.warn(`Smaller than ${SIZE}px. It will be upscaled and may look soft.`);
+  // Never upscale. Enlarging a small photo just adds bytes and blur —
+  // better to serve it at its real size and let CSS size the box.
+  const SIZE = Math.min(MAX, meta.width, meta.height);
+  if (SIZE < MAX) {
+    console.log(`Keeping native ${SIZE}px rather than upscaling to ${MAX}px.`);
   }
 
   const base = sharp(src)
@@ -52,7 +55,7 @@ const SIZE = 600;
   console.log('');
   console.log('  <picture>');
   console.log('    <source srcset="assets/ryan.webp" type="image/webp">');
-  console.log('    <img src="assets/ryan.jpg" width="600" height="600"');
+  console.log(`    <img src="assets/ryan.jpg" width="${SIZE}" height="${SIZE}"`);
   console.log('         alt="Ryan Bowman" loading="lazy" decoding="async">');
   console.log('  </picture>');
 })().catch(err => {
