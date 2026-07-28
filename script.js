@@ -18,6 +18,12 @@
     // The site is positioned to sell anywhere — don't narrow this to a region.
     area:   'Indiana',
 
+    // Profile links. These do double duty: they show a visitor a real person
+    // exists, and they give search engines something to tie "Bowsites" to.
+    // Make sure both profiles link BACK here — a one-way link is worth little.
+    linkedin: 'https://www.linkedin.com/in/ryan-bowman19',
+    github:   'https://github.com/RyanBowman19',
+
     // Formspree form ID (from https://formspree.io/f/mqerndon).
     // Blank falls back to opening the visitor's email client.
     formspreeId: 'mqerndon',
@@ -70,6 +76,14 @@
     if (areaOk) {
       $$('[data-site="area"]').forEach(el => { el.textContent = SITE.area; });
     }
+
+    // Profile links — drop any that aren't configured rather than leaving
+    // a dead "#" anchor sitting in the footer.
+    [['linkedin', SITE.linkedin], ['github', SITE.github]].forEach(([key, url]) => {
+      const nodes = $$(`[data-site="${key}"]`);
+      if (isPlaceholder(url)) { nodes.forEach(el => el.closest('li')?.remove() ?? el.remove()); return; }
+      nodes.forEach(el => { el.href = url; });
+    });
 
     // Hide contact rows that have no real value yet, so nothing broken ships.
     if (!emailOk) $$('.contact-line[data-site="mailto"]').forEach(el => el.remove());
@@ -226,7 +240,7 @@
     const targets = $$(
       '.section-head, .card, .step, .case-visual, .case-copy, ' +
       '.calc-controls, .calc-result, .faq-item, .contact-aside, .form-shell, ' +
-      '.benefits-copy, .benefits-list li, .option'
+      '.benefits-copy, .benefits-list li, .option, .about-portrait, .about-copy'
     );
     targets.forEach((el, i) => {
       el.classList.add('reveal');

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12283C"/>
+      <stop offset="1" stop-color="#0B1826"/>
+    </linearGradient>
+    <radialGradient id="amberGlow" cx="0.22" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#E08A1E" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#E08A1E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="navyGlow" cx="0.84" cy="0.18" r="0.5">
+      <stop offset="0" stop-color="#3E7BA8" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#3E7BA8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#amberGlow)"/>
+  <rect width="1200" height="630" fill="url(#navyGlow)"/>
+
+  <!-- logo mark + wordmark -->
+  <g transform="translate(84 70)">
+    <rect width="58" height="58" rx="13" fill="#E08A1E"/>
+    <path d="M16.3 14.5h13.6a9.4 9.4 0 0 1 3.8 18A10.2 10.2 0 0 1 30.8 43.5H16.3z"
+          fill="none" stroke="#0F2233" stroke-width="4.7" stroke-linejoin="round"/>
+    <text x="78" y="41" font-family="Georgia, 'Times New Roman', serif"
+          font-size="40" font-weight="bold" fill="#FFFFFF" letter-spacing="-0.5">Bowsites</text>
+  </g>
+
+  <!-- accent rule -->
+  <rect x="84" y="212" width="108" height="5" rx="2.5" fill="#E08A1E"/>
+
+  <!-- headline -->
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="92" font-weight="bold"
+        fill="#FFFFFF" letter-spacing="-3">
+    <tspan x="84" y="325">Get found. Get</tspan>
+    <tspan x="84" y="418">called. Get hired.</tspan>
+  </text>
+
+  <!-- subhead -->
+  <text font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="29" fill="#A9BDCE">
+    <tspan x="84" y="480">Real websites for small businesses.</tspan>
+    <tspan x="84" y="521">One price, up front.</tspan>
+  </text>
+
+  <!-- trust row -->
+  <g transform="translate(84 566)">
+    <circle cx="5" cy="-6" r="5" fill="#E08A1E"/>
+    <text x="22" y="0" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+          font-size="22" font-weight="bold" fill="#CBD8E3">One person, start to finish</text>
+
+    <circle cx="365" cy="-6" r="5" fill="#E08A1E"/>
+    <text x="382" y="0" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+          font-size="22" font-weight="bold" fill="#CBD8E3">You own everything</text>
+  </g>
+</svg>

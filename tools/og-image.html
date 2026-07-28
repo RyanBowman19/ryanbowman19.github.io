@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bowsites OG card source</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #555; }
+
+  /* Exactly 1200x630 — the size LinkedIn, Facebook, iMessage and X expect. */
+  .card {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    background: #0F2233;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    padding: 76px 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .glow {
+    position: absolute;
+    inset: -40% -20% auto -20%;
+    height: 90%;
+    background:
+      radial-gradient(52% 62% at 22% 44%, rgba(224,138,30,.34), transparent 68%),
+      radial-gradient(46% 56% at 82% 24%, rgba(36,80,111,.60), transparent 72%);
+    filter: blur(46px);
+  }
+  .row { position: relative; display: flex; align-items: center; gap: 18px; }
+  .mark { width: 60px; height: 60px; }
+  .word {
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 40px; font-weight: 600; letter-spacing: -.02em;
+  }
+  h1 {
+    position: relative;
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 92px;
+    line-height: 1.03;
+    letter-spacing: -.035em;
+    font-weight: 600;
+    max-width: 17ch;
+  }
+  .sub {
+    position: relative;
+    font-size: 29px;
+    line-height: 1.45;
+    color: #A9BDCE;
+    max-width: 30ch;
+    margin-top: 26px;
+  }
+  .foot { position: relative; display: flex; align-items: center; gap: 30px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 11px;
+    font-size: 22px; font-weight: 600; color: #CBD8E3;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #E08A1E; }
+  .rule { position: relative; height: 5px; width: 108px; background: #E08A1E; border-radius: 99px; }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="glow"></div>
+
+  <div class="row">
+    <svg class="mark" viewBox="0 0 32 32">
+      <rect width="32" height="32" rx="7" fill="#E08A1E"/>
+      <path d="M9 8h7.5a5.2 5.2 0 0 1 2.1 9.95A5.6 5.6 0 0 1 17 24H9z"
+            fill="none" stroke="#0F2233" stroke-width="2.6" stroke-linejoin="round"/>
+    </svg>
+    <span class="word">Bowsites</span>
+  </div>
+
+  <div>
+    <div class="rule" style="margin-bottom:30px"></div>
+    <h1>Get found. Get called. Get hired.</h1>
+    <p class="sub">Real websites for small businesses. One price, up front.</p>
+  </div>
+
+  <div class="foot">
+    <span class="pill"><span class="dot"></span> One person, start to finish</span>
+    <span class="pill"><span class="dot"></span> You own everything</span>
+  </div>
+</div>
+</body>
+</html>
