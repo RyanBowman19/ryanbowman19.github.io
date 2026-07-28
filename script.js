@@ -14,7 +14,9 @@
   const SITE = {
     email:  'bowmanryan328@gmail.com',
     phone:  '(765) 376-8599',
-    area:   'Indiana',         // narrow this to your counties — it reads better and ranks better
+    // Where you're based, not who you'll work with. Appears once, in the FAQ.
+    // The site is positioned to sell anywhere — don't narrow this to a region.
+    area:   'Indiana',
 
     // Formspree form ID (from https://formspree.io/f/mqerndon).
     // Blank falls back to opening the visitor's email client.
@@ -34,7 +36,7 @@
       menu:     { label: 'Menu / price list',cost: 200 },
       logo:     { label: 'Logo design',      cost: 400 },
       copy:     { label: 'Copywriting',      cost: 450 },
-      photo:    { label: 'On-site photos',   cost: 350 },
+      photo:    { label: 'Photo help',        cost: 250 },
     },
     care:   { none: 0, essential: 45, growth: 95 },
     spread: 0.15,     // ± range shown around the midpoint
@@ -88,7 +90,8 @@
         const data = JSON.parse(ld.textContent);
         if (emailOk) data.email = SITE.email; else delete data.email;
         if (phoneOk) data.telephone = SITE.phone; else delete data.telephone;
-        if (areaOk)  data.areaServed = { '@type': 'Place', name: SITE.area };
+        // areaServed stays "Worldwide" — SITE.area is only where Ryan is based,
+        // not a limit on who he'll work with. Don't let it narrow the markup.
         ld.textContent = JSON.stringify(data);
       } catch { /* leave the original markup alone */ }
     }
