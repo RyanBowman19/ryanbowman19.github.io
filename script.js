@@ -226,7 +226,7 @@
     const targets = $$(
       '.section-head, .card, .step, .case-visual, .case-copy, ' +
       '.calc-controls, .calc-result, .faq-item, .contact-aside, .form-shell, ' +
-      '.benefits-copy, .benefits-list li'
+      '.benefits-copy, .benefits-list li, .option'
     );
     targets.forEach((el, i) => {
       el.classList.add('reveal');

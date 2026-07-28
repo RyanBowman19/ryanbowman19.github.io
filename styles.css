@@ -736,6 +736,57 @@ p { text-wrap: pretty; }
 
 
 /* ─────────────────────────────────────────────
+   7a. THE THREE BAD OPTIONS
+   ─────────────────────────────────────────────
+   Deliberately NOT a 3-card grid — the problem section directly above
+   already is one, and a second would read as the same beat twice. Rows
+   build downward toward the highlighted answer. */
+.option-list {
+  display: grid;
+  gap: var(--s-3);
+  counter-reset: opt;
+  max-width: 62rem;
+}
+.option {
+  display: grid;
+  grid-template-columns: minmax(9.5rem, 13rem) 1fr;
+  gap: var(--s-3) var(--s-5);
+  align-items: baseline;
+  padding: var(--s-5);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+@media (max-width: 640px) {
+  .option { grid-template-columns: 1fr; gap: var(--s-2); padding: var(--s-4) var(--s-5); }
+}
+
+.option-tag {
+  font-family: var(--font-display);
+  font-size: var(--fs-500);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: -.01em;
+}
+.option p { font-size: var(--fs-300); color: var(--text-muted); }
+
+/* The answer. Amber is reserved for actions everywhere else on this page,
+   so this row uses weight and a solid edge instead of stealing that signal. */
+.option-mine {
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: var(--sh-2);
+}
+.option-mine .option-tag { color: var(--amber); }
+.option-mine p { color: #D7E1EA; }
+:root[data-theme="dark"] .option-mine { background: #060E16; border-color: #22323F; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .option-mine { background: #060E16; border-color: #22323F; }
+}
+
+
+/* ─────────────────────────────────────────────
    7b. BENEFITS
    ───────────────────────────────────────────── */
 .benefits-grid {
