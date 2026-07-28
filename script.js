@@ -559,7 +559,29 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════
-     8. Misc
+     8. Landing on a #hash
+     ───────────────────────────────────────────────────────────────
+     `html { scroll-behavior: smooth }` makes the browser's initial jump
+     to a hash animated, and that animation gets cancelled before it
+     arrives — so a shared link like /#contact lands at the top of the
+     page instead of the form. Redo the jump explicitly, instantly,
+     once layout has settled. scrollIntoView honours scroll-padding-top,
+     so the sticky header doesn't cover the target.
+     ═══════════════════════════════════════════════════════════════ */
+  function initHashLanding() {
+    if (!location.hash) return;
+
+    let target;
+    try { target = document.querySelector(location.hash); } catch { return; }
+    if (!target) return;
+
+    const jump = () => target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    requestAnimationFrame(() => requestAnimationFrame(jump));
+    addEventListener('load', jump, { once: true });   // again after fonts/images settle
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     9. Misc
      ═══════════════════════════════════════════════════════════════ */
   function initMisc() {
     const year = $('#year');
@@ -576,5 +598,6 @@
   initReveal();
   initCalculator();
   initLeadForm();
+  initHashLanding();
   initMisc();
 })();
