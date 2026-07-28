@@ -13,7 +13,7 @@
      ═══════════════════════════════════════════════════════════════ */
   const SITE = {
     email:  'bowmanryan328@gmail.com',
-    phone:  'REPLACE_PHONE',   // add a number and the call links switch on everywhere
+    phone:  '(765) 376-8599',
     area:   'Indiana',         // narrow this to your counties — it reads better and ranks better
 
     // Formspree form ID (from https://formspree.io/f/mqerndon).
