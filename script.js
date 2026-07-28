@@ -27,6 +27,11 @@
     // Formspree form ID (from https://formspree.io/f/mqerndon).
     // Blank falls back to opening the visitor's email client.
     formspreeId: 'mqerndon',
+
+    // Booking link — Calendly, Cal.com, TidyCal, any of them.
+    // Blank or REPLACE_ removes every "Book a call" button rather than
+    // leaving one that points nowhere.
+    booking: 'https://calendly.com/bowmanryan328',
   };
 
   /* Project pricing — every number the estimator uses. Tune freely. */
@@ -84,6 +89,19 @@
       if (isPlaceholder(url)) { nodes.forEach(el => el.closest('li')?.remove() ?? el.remove()); return; }
       nodes.forEach(el => { el.href = url; });
     });
+
+    // Booking buttons: wire them up, or take them out entirely. A CTA that
+    // goes nowhere is worse than no CTA.
+    const bookingNodes = $$('[data-site="booking"]');
+    if (isPlaceholder(SITE.booking)) {
+      bookingNodes.forEach(el => el.remove());
+    } else {
+      bookingNodes.forEach(el => {
+        el.href = SITE.booking;
+        el.target = '_blank';
+        el.rel = 'noopener';
+      });
+    }
 
     // Hide contact rows that have no real value yet, so nothing broken ships.
     if (!emailOk) $$('.contact-line[data-site="mailto"]').forEach(el => el.remove());

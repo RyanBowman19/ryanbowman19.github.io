@@ -1263,6 +1263,46 @@ input[type="range"]::-moz-range-thumb {
 
 
 /* ─────────────────────────────────────────────
+   11c. GUARANTEE
+   ─────────────────────────────────────────────
+   Sits directly under the price. Uses the accent border rather than an
+   accent fill, so it reads as important without competing with the CTA. */
+.guarantee {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-5);
+  align-items: start;
+  margin-top: var(--s-6);
+  padding: clamp(var(--s-5), 3vw, var(--s-6));
+  background: color-mix(in srgb, var(--ok) 7%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--ok) 32%, var(--border));
+  border-radius: var(--r-lg);
+}
+@media (max-width: 560px) {
+  .guarantee { grid-template-columns: 1fr; gap: var(--s-4); }
+}
+.guarantee-mark {
+  display: grid;
+  place-items: center;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ok) 16%, transparent);
+  color: var(--ok);
+}
+.guarantee-mark .ico { width: 26px; height: 26px; }
+.guarantee h3 { font-size: var(--fs-600); margin-bottom: var(--s-3); }
+.guarantee p { font-size: var(--fs-300); color: var(--text); max-width: 62ch; }
+.guarantee-fine {
+  margin-top: var(--s-3);
+  font-size: var(--fs-200) !important;
+  color: var(--text-muted) !important;
+  font-style: italic;
+}
+
+.book-cta { width: 100%; margin-bottom: var(--s-6); }
+
+
+/* ─────────────────────────────────────────────
    12. FAQ
    ───────────────────────────────────────────── */
 .faq-list { display: grid; gap: var(--s-3); }

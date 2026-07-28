@@ -2,7 +2,7 @@
 
 **Live: <https://ryanbowman19.github.io/>**
 
-Marketing site for Bowsites — web design for local Indiana businesses.
+Marketing site for Bowsites — web design for small businesses.
 
 Deployed on GitHub Pages from the `main` branch. **Push to `main` and the site
 updates itself** — usually live within a minute. No build, no deploy step.
@@ -42,7 +42,7 @@ bowsites/
 
 ## 1. Before you launch — the required edits
 
-### a) Your contact details — ⚠ phone still missing
+### a) Your contact details — ✓ done
 
 Open `script.js`. The first block is the only place your details live — every
 link, the footer, the mobile call button, and the search-engine markup read
@@ -51,16 +51,11 @@ from it. Current state:
 ```js
 const SITE = {
   email:  'bowmanryan328@gmail.com',   // ✓ live
-  phone:  'REPLACE_PHONE',             // ✗ add this
+  phone:  '(765) 376-8599',            // ✓ live
   area:   'Indiana',                   // ✓ works, but narrow it to your counties
   formspreeId: 'mqerndon',             // ✓ live
 };
 ```
-
-**Add a phone number.** Until you do, the "Rather just call?" line shows only
-email and the sticky mobile Call button is stripped out entirely. For local
-businesses a tap-to-call button is often the highest-converting element on the
-page — you're leaving it on the table.
 
 **Narrow the service area.** "Indiana" is vague and ranks for nothing. Something
 like `'Montgomery, Parke & Putnam counties'` reads better in the FAQ and gives
@@ -69,7 +64,25 @@ Google an actual place to associate you with.
 The page hides broken links rather than showing dead ones, and logs a checklist
 to the browser console listing whatever's still missing.
 
-### b) Contact form — ✓ connected, but test it
+### b) Booking link — ✓ live
+
+`SITE.booking` points at <https://calendly.com/bowmanryan328>. The "Or book a
+20-minute call" button appears under the contact form.
+
+Three things to check inside Calendly, because they cost you bookings:
+
+1. **Make a 20-minute event type** named something like "Free site review."
+   A bare Calendly root URL shows every event type you have, which is a
+   confusing first impression. A single named event converts better.
+2. **Connect your Google Calendar** so it only offers times you're genuinely
+   free. Nothing kills trust faster than a booking you have to cancel.
+3. **Strip the invitee questions down to name and email.** Every extra field
+   loses bookings, and you'll ask the rest on the call anyway.
+
+If you make a dedicated event type, update `SITE.booking` to that fuller URL
+(e.g. `https://calendly.com/bowmanryan328/site-review`).
+
+### c) Contact form — ✓ connected, but test it
 
 Wired to Formspree form `mqerndon`. Submissions land in
 `bowmanryan328@gmail.com`.
@@ -81,41 +94,28 @@ real enquiries may not reach you. Do this before you give the link to anyone.
 Free tier covers 50 submissions a month. If you outgrow it, the paid tier is
 cheap, or swap to Netlify Forms by moving the site to Netlify.
 
-### c) The testimonials are fake — deal with them
+### d) Testimonials — none on the page, by design
 
-The three quotes in the "Don't take my word for it" section are **placeholders**.
-They show the shape of a good quote. They are not real, and attribution reads
-`[Client name]` so they can't ship by accident.
+The section was removed rather than shipped with invented quotes. Markup and
+guidance for adding real ones are in `docs/03-copy-deck.md`.
 
-Two options, no third:
+Ask a client right after launch: *"What were you worried about before we
+started?"* That gets usable words instead of "very professional." Get written
+permission to use their name and business.
 
-- **Get real ones.** Ask a client right after launch. Ask *"What were you
-  worried about before we started?"* — you'll get usable words instead of "very
-  professional." Get written permission to use their name and business.
-- **Delete the whole `<section id="reviews">` block.** An empty spot is fine.
+Publishing invented reviews breaks FTC rules and carries real penalties.
 
-Publishing invented reviews is illegal in the US (FTC rules on fake
-testimonials, in force since 2024) and carries real penalties. Don't.
+### e) Case-study numbers — currently hidden
 
-### d) The case-study numbers
+The Waveland metrics row and the hero speed chip are both commented out in
+`index.html`, because neither number had been measured.
 
-In `index.html`, the Waveland case study has three metric slots showing `—`:
+Run [PageSpeed Insights](https://pagespeed.web.dev) against
+`waveland.lib.in.us` and against your own live URL, then uncomment those blocks
+and fill in the real figures. A web designer caught with an unverified speed
+claim on their own site has a hard afternoon.
 
-```html
-<div class="metric"><strong data-metric>—</strong><span>Load time</span></div>
-```
-
-**Measure them, don't guess.** Run [PageSpeed Insights](https://pagespeed.web.dev)
-against `waveland.lib.in.us` and put the real numbers in. Made-up metrics on a
-web-design site are the fastest way to lose a client who checks.
-
-The hero also shows a **"0.9s load time on 4G"** chip. That number is a
-placeholder too. Deploy the site, run PageSpeed Insights against the live URL,
-and either put the real figure in or delete the `.score-chip` block from
-`index.html`. A web designer caught with an unverified speed claim on their own
-site has a hard afternoon.
-
-### e) Set your real prices
+### f) Set your real prices
 
 `script.js` → the `PRICING` object. Every number the estimator uses is there,
 including the care-plan prices, which the pricing cards read automatically so
@@ -124,12 +124,22 @@ the two sections can never disagree.
 The values shipped are placeholders based on typical small-market rates. Change
 them to yours before launch.
 
-### f) Domain and social image
+### g) Social image — ✓ done
 
-- `index.html` — replace `https://bowsites.com/` in the canonical and Open Graph tags
-- Create `assets/og-image.png` at **1200×630** — this is what shows when someone
-  shares your link in a text or on Facebook
-- Add `assets/apple-touch-icon.png` at 180×180
+`assets/og-image.png` (1200×630) is what shows when your link is shared to
+LinkedIn, Facebook, or a text message. To change it, edit
+`assets/og-image.svg` and re-run:
+
+```powershell
+npx --yes -p sharp node tools/make-og.js
+```
+
+After changing it, re-scrape the URL at
+[LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) so it stops
+serving the cached old one.
+
+Still missing: `assets/apple-touch-icon.png` at 180×180 (the icon shown when
+someone saves the site to a phone home screen). Minor.
 
 ---
 
