@@ -741,6 +741,19 @@ p { text-wrap: pretty; }
    Deliberately NOT a 3-card grid — the problem section directly above
    already is one, and a second would read as the same beat twice. Rows
    build downward toward the highlighted answer. */
+/* Compressed replacement for the old three-card problem section. Three
+   one-liners carry the same argument in a fifth of the vertical space. */
+.cost-strip {
+  display: grid;
+  gap: var(--s-3);
+  max-width: 62rem;
+  margin-bottom: var(--s-6);
+  padding-left: var(--s-5);
+  border-left: 3px solid color-mix(in srgb, var(--err) 55%, transparent);
+}
+.cost-strip li { font-size: var(--fs-300); color: var(--text-muted); }
+.cost-strip strong { color: var(--text-strong); font-weight: 600; }
+
 .option-list {
   display: grid;
   gap: var(--s-3);
@@ -1202,6 +1215,51 @@ input[type="range"]::-moz-range-thumb {
   border-bottom: 1px solid var(--border-soft);
 }
 .plan .btn { margin-top: auto; }
+
+
+/* ─────────────────────────────────────────────
+   11b. CARE PLANS DRAWER
+   ─────────────────────────────────────────────
+   Was a full section. Now opens on demand inside the estimate block —
+   monthly plans are a post-launch question, not a pre-hire one. */
+.plans-drawer {
+  margin-top: var(--s-6);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: border-color var(--dur) var(--ease);
+}
+.plans-drawer[open] { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+
+.plans-drawer > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-5);
+  cursor: pointer;
+  list-style: none;
+}
+.plans-drawer > summary::-webkit-details-marker { display: none; }
+.plans-drawer > summary:hover { background: color-mix(in srgb, var(--text-strong) 3%, transparent); }
+.plans-drawer summary strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-500);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+.plans-drawer summary em {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: var(--fs-300);
+  color: var(--text-muted);
+}
+.plans-drawer[open] .faq-ico { transform: rotate(45deg); }
+.plans-drawer .plans { padding: 0 var(--s-5) var(--s-5); }
+.plans-drawer .plan { background: var(--bg); }
 
 
 /* ─────────────────────────────────────────────
