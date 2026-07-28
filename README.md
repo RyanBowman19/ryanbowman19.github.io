@@ -13,6 +13,13 @@ git commit -m "Update pricing"
 git push
 ```
 
+> **If a change looks like it didn't deploy, it's your browser cache.**
+> GitHub Pages tells browsers to hold `styles.css` and `script.js` for about
+> ten minutes. Your own browser keeps serving the old copy even after the
+> new one is live. Press **Ctrl+Shift+R** to force a fresh load before
+> concluding something is broken. Real first-time visitors always get the
+> current version — this only affects people who've been to the site before.
+
 Measured on the live site: **~28 KB total transfer** (10.5 KB HTML, 10.2 KB CSS,
 7.0 KB JS, Brotli-compressed), 3 requests, free HTTPS.
 
