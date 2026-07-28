@@ -1,6 +1,20 @@
 # Bowsites
 
+**Live: <https://ryanbowman19.github.io/>**
+
 Marketing site for Bowsites — web design for local Indiana businesses.
+
+Deployed on GitHub Pages from the `main` branch. **Push to `main` and the site
+updates itself** — usually live within a minute. No build, no deploy step.
+
+```powershell
+git add -A
+git commit -m "Update pricing"
+git push
+```
+
+Measured on the live site: **~28 KB total transfer** (10.5 KB HTML, 10.2 KB CSS,
+7.0 KB JS, Brotli-compressed), 3 requests, free HTTPS.
 
 Static HTML, CSS, and JavaScript. **No build step, no dependencies, no framework.**
 Open `index.html` in a browser and it runs. That is deliberate: it's the fastest
@@ -21,40 +35,44 @@ bowsites/
 
 ## 1. Before you launch — the required edits
 
-### a) Your contact details
+### a) Your contact details — ⚠ phone still missing
 
 Open `script.js`. The first block is the only place your details live — every
-link, the footer, the mobile call button, and the search-engine markup all read
-from it.
+link, the footer, the mobile call button, and the search-engine markup read
+from it. Current state:
 
 ```js
 const SITE = {
-  email:  'ryan@bowsites.com',
-  phone:  '(765) 555-0142',
-  area:   'Montgomery, Parke & Putnam counties',
-  formspreeId: 'xnqrkvbz',
+  email:  'bowmanryan328@gmail.com',   // ✓ live
+  phone:  'REPLACE_PHONE',             // ✗ add this
+  area:   'Indiana',                   // ✓ works, but narrow it to your counties
+  formspreeId: 'mqerndon',             // ✓ live
 };
 ```
 
-Until you fill these in, the page hides the broken links rather than showing dead
-ones, and logs a checklist to the browser console telling you what's still missing.
+**Add a phone number.** Until you do, the "Rather just call?" line shows only
+email and the sticky mobile Call button is stripped out entirely. For local
+businesses a tap-to-call button is often the highest-converting element on the
+page — you're leaving it on the table.
 
-### b) Connect the contact form
+**Narrow the service area.** "Indiana" is vague and ranks for nothing. Something
+like `'Montgomery, Parke & Putnam counties'` reads better in the FAQ and gives
+Google an actual place to associate you with.
 
-The form has no backend — it needs a form service. Free tier is plenty.
+The page hides broken links rather than showing dead ones, and logs a checklist
+to the browser console listing whatever's still missing.
 
-1. Go to [formspree.io](https://formspree.io) and create a free account
-2. Create a new form, point it at your email
-3. Copy the form ID from the endpoint URL — in
-   `https://formspree.io/f/xnqrkvbz` the ID is `xnqrkvbz`
-4. Paste it into `SITE.formspreeId`
+### b) Contact form — ✓ connected, but test it
 
-**Without an ID, the form still works** — it falls back to opening the visitor's
-email client with everything pre-filled. That loses a meaningful share of leads,
-so do the two-minute setup.
+Wired to Formspree form `mqerndon`. Submissions land in
+`bowmanryan328@gmail.com`.
 
-Netlify Forms is a fine alternative if you host on Netlify: add
-`netlify` and `name="contact"` to the `<form>` tag instead.
+**Send yourself a test message from the live site right now.** Formspree
+requires you to confirm the form on first submission, and until you do,
+real enquiries may not reach you. Do this before you give the link to anyone.
+
+Free tier covers 50 submissions a month. If you outgrow it, the paid tier is
+cheap, or swap to Netlify Forms by moving the site to Netlify.
 
 ### c) The testimonials are fake — deal with them
 
@@ -110,41 +128,42 @@ them to yours before launch.
 
 ## 2. Preview locally
 
-Just double-click `index.html`. For a proper local server (recommended, since
-`file://` behaves differently from real hosting):
-
 ```powershell
-# Python
-python -m http.server 8000
-
-# or Node
-npx serve .
+npx --yes http-server -p 8777 -c-1
 ```
 
-Then open <http://localhost:8000>.
+Then open <http://localhost:8777>.
+
+Note: `python -m http.server` won't work on this machine — the `python` command
+is the Microsoft Store stub, not a real install. Use the Node command above.
 
 ---
 
-## 3. Deploy
+## 3. Deploy — already done
 
-All three options are free and take under five minutes. Pick one.
+Live on GitHub Pages at <https://ryanbowman19.github.io/>, served from `main`.
+Push and it redeploys. HTTPS is automatic and enforced.
 
-**Cloudflare Pages** — fastest network, best for a speed-focused pitch
-1. Push this folder to a GitHub repo
-2. Cloudflare dashboard → Workers & Pages → Create → Pages → connect the repo
-3. Build command: *leave blank*. Output directory: `/`
-4. Add your custom domain under the project's Custom Domains tab
+### Pointing a real domain at it later
 
-**Netlify** — easiest
-1. Go to [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Drag this folder onto the page. Done.
-3. Site settings → Domain management to attach your domain
+When you buy `bowsites.com` (Cloudflare Registrar or Namecheap, ~$10/yr):
 
-**GitHub Pages**
-1. Push to a repo named `bowsites`
-2. Settings → Pages → Source: `main`, folder `/ (root)`
+1. At your registrar, add these DNS records:
+   ```
+   A     @    185.199.108.153
+   A     @    185.199.109.153
+   A     @    185.199.110.153
+   A     @    185.199.111.153
+   CNAME www  ryanbowman19.github.io
+   ```
+2. GitHub repo → Settings → Pages → Custom domain → enter `bowsites.com` → Save
+3. Wait for the DNS check, then tick **Enforce HTTPS**
+4. Find-and-replace `https://ryanbowman19.github.io/` with `https://bowsites.com/`
+   in `index.html`, `robots.txt`, and `sitemap.xml`, then push
 
-All three give you free HTTPS automatically.
+A custom domain is worth the $10. `ryanbowman19.github.io` is fine for showing
+people, but a web designer selling websites off a github.io subdomain invites
+the obvious question.
 
 ---
 
